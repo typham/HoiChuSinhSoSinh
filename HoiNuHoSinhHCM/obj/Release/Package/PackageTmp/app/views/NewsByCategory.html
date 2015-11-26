@@ -1,0 +1,94 @@
+﻿<div id="NewsByNewsCategory">
+    <!-- BOX NEWS BY CATEGORY -->
+    <div class="panel panel-primary" ng-show="!state.add && !state.edit">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{NewsCategoryName}}</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-danger" ng-click="state.add = true">Thêm tin</button>
+            </p>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tiêu đề tin</th>
+                        <th>Ngày đăng</th>
+                        <!--<th>Xem</th>-->
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in NewsByCategory">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.CreatedDate}}</td>
+                        <!--<td><a href="/admin#/NewsByCategory/{{item.Id}}">Xem</a></td>-->
+                        <td>
+                            <i class="fa fa-pencil fa-2x" title="Edit" ng-click="edit($index)" style="margin-right:10px"></i>
+                            <i class="fa fa-trash fa-2x" title="Edit" ng-click="delete($index)" style="margin-right:10px"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /BOX NEWS BY CATEGORY -->
+
+    <div class="panel panel-primary" ng-show="state.add || state.edit">
+        <div class="panel-heading">
+            <h3 class="panel-title">Thêm tin</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-danger" ng-click="save()">Lưu</button>
+                <button class="btn btn-danger" ng-click="resetState()">Hủy</button>
+            </p>
+
+            <form>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tiêu đề tin</label>
+                        <input class="form-control" placeholder="Tiêu đề tin" ng-model="News.Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Tóm tắt</label>
+                        <textarea rows="7" class="form-control" placeholder="Tóm tắt" ng-model="News.Summary"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hình đại diện</label>
+                        <img ng-src="{{News.Image!=''?News.Image:'/Content/Images/no-image.jpg'}}" class="image" ng-init="News.Image ='/Content/Images/no-image.jpg'" onclick="BrowseServer()" style="max-width:100px" />
+                    </div>
+                    
+                </div>
+                
+                <div class="col-md-12" style="clear:both">
+                    <label>Nội dung</label>
+                    <textarea class="form-control" ckeditor="editorOptions" ng-model="News.Content" placeholder="Nội dung"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-success" ng-show="saved">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Đã lưu</strong>
+</div>
+
+
+<style>
+    #banner-list .fa {
+        cursor: pointer;
+        align-items: center;
+    }
+</style>
+
+<script>
+    function SetFileField(fileUrl, data) {
+        $('.image').attr('src', fileUrl);
+        angular.element('#NewsByNewsCategory').scope().News.Image = fileUrl;
+    }
+</script>

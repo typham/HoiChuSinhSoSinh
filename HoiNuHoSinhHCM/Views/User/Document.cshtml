@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.Document>
+@{
+    ViewBag.Title = "Document";
+    int stt = 1;
+}
+
+<h2>Tra cứu tài liệu</h2>
+
+<ul class="nav nav-tabs">
+    @foreach (var item in Model.Where(i => i.ConfigGroup == 0))
+    {
+        <li class="@(stt==1? "active":"")"><a data-toggle="tab" href="#@item.Id">@item.Name</a></li>
+        stt++;
+    }
+
+
+</ul>
+
+<div class="tab-content">
+    @{stt = 1;}
+    @foreach (var item in Model.Where(i => i.ConfigGroup == 0))
+    {
+        <div id="@item.Id" class="tab-pane fade in @(stt==1? "active":"")">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên tài liệu</th>
+                        <th>ghi chú</th>
+                        <th>Ngày đăng</th>
+                        <th>Tải về</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item1 in Model.Where(i=>i.ConfigGroup == item.Id))
+                    {
+                        <tr>
+                            <td>1</td>
+                            <td>@item1.Name</td>
+                            <td>@item1.Note</td>
+                            <td>@item1.CreatedDate</td>
+                            <td><a href="@item1.LinkDownload" target="_blank"><i class="glyphicon glyphicon-download-alt"></i></a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        stt++;
+    }
+</div>

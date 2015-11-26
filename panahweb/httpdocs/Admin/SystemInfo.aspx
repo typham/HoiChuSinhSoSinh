@@ -1,0 +1,1 @@
+﻿<%@ Page MasterPageFile="~/Admin/Default.Master" Language="C#" AutoEventWireup="true" CodeBehind="SystemInfo.aspx.cs" Inherits="HCSSS.Framework.SystemInfo" Title="HCSSS Framework - Thông tin hệ thống" %>

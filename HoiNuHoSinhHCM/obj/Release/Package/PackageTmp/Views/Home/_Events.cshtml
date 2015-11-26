@@ -1,0 +1,16 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.News>
+@using HoiNuHoSinhHCM.Models
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sự kiên - Thông báo</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="event-list">
+            @foreach (var item in Model)
+            {
+                <li class="event-list-item"><a href="/tin-tuc/@Exts.ToAscii(item.NewsCategory.Name)/@Exts.ToAscii(item.Name)"><i class="glyphicon glyphicon-triangle-right"></i>@item.Name</a></li>    
+            }
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿<div id="NewsCategory">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Quản lý tài liệu</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-danger" ng-click="addState(true)" ng-show="!state && !editId">Thêm loại tài liệu</button>
+                <!-- Add -->
+                <button class="btn btn-danger" ng-click="addState(false); add()" ng-show="state">Lưu</button>
+                <!-- Update-->
+                <button class="btn btn-danger" ng-click="addState(false); update()" ng-show="editId">Lưu</button>
+                <button class="btn btn-danger" ng-click="addState(false); editId=null; NewsCategory.Name=null" ng-show="state|| editId">Hủy</button>
+            </p>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Loại tài liệu</th>
+                        <th>Tổng số tài liệu</th>
+                        <th>Danh sách tài liệu</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in DocumentTypeList">
+                        <td>{{$index+1}}</td>
+                        <td><span ng-show="item.Id != editId">{{item.Name}}</span> <input id="nameEdit" ng-model="nameEdit" class="form-control" ng-if="item.Id == editId" value="{{item.Name}}" /></td>
+                        <td>{{item.TotalNews}}</td>
+                        <td><a href="/admin#/DocumentByType/{{item.Id}}">Xem</a></td>
+                        <td>
+                            <i class="fa fa-pencil fa-2x" title="Edit" ng-click="edit($index)" style="margin-right:10px"></i>
+                            <i class="fa fa-trash-o fa-2x" title="Xóa" ng-click="delete($index)"></i>
+                        </td>
+                    </tr>
+                    <tr ng-show="state">
+                        <td>#</td>
+                        <td><input class="form-control" ng-model="DocumentType.Name" /></td>
+                        <td>#</td>
+                        <td>#</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-success" ng-show="saved">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Đã lưu</strong>
+</div>
+
+
+<style>
+    #banner-list .fa {
+        cursor: pointer;
+        align-items: center;
+    }
+</style>
+
+<script>
+    function SetFileField(fileUrl, data) {
+        angular.element('#banner-list').scope().addBanner(fileUrl);
+        angular.element('#banner-list').scope().$apply();
+    }
+</script>

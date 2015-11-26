@@ -1,0 +1,37 @@
+﻿<div id="banner-list">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Quản lý banner</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-danger" onclick="BrowseServer()">Thêm</button>
+                <button class="btn btn-danger" ng-click="save()">Lưu</button>
+            </p>
+            <div class="col-md-3" ng-repeat="item in banners">
+                <i class="fa fa-trash-o fa-2x" ng-click="Delete($index)"></i>
+                <img src="{{item}}" style="max-width:200px;" class="img-thumbnail"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-success" ng-show="saved">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Đã lưu</strong>
+</div>
+
+
+<style>
+    #banner-list .fa {
+        cursor: pointer;
+        align-items:center;
+    }
+</style>
+
+<script>
+    function SetFileField(fileUrl, data) {
+        angular.element('#banner-list').scope().addBanner(fileUrl);
+        angular.element('#banner-list').scope().$apply();
+    }
+</script>

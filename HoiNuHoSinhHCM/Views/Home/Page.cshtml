@@ -1,0 +1,11 @@
+﻿@model HoiNuHoSinhHCM.Models.NewsCategory
+@using HoiNuHoSinhHCM.Models
+
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+@Html.Raw(Model.Content)
+

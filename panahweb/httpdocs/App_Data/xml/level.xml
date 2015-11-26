@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<level>
+  <item value="1" text="Giáo Sư"></item>
+  <item value="2" text="Phó Giáo Sư"></item>
+  <item value="3" text="Tiến Sĩ"></item>
+  <item value="4" text="Thạc Sĩ"></item>
+  <item value="5" text="Chuyên Khoa 1"></item>
+  <item value="6" text="Chuyên Khoa 2"></item>
+  <item value="7" text="Điều Dưỡng"></item>
+  <item value="8" text="Nữ Hộ Sinh"></item>
+  <item value="9" text="Khác"></item>
+</level>

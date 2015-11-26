@@ -1,0 +1,11 @@
+﻿@model HoiNuHoSinhHCM.Models.News
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+<div class="news-details">
+@Html.Raw(Model.Content)
+</div>

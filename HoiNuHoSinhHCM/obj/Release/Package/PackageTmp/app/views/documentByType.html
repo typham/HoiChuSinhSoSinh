@@ -1,0 +1,83 @@
+﻿<div id="NewsCategory">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Danh sách tài liệu thuộc loại {{currentDocumentType.Name}}</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-danger" ng-click="addState(true);document = null" ng-show="!state && !editId">Thêm tài liệu</button>
+                <!-- Add -->
+                <button class="btn btn-danger" ng-click="addState(false); add()" ng-show="state">Lưu</button>
+                <!-- Update-->
+                <button class="btn btn-danger" ng-click="addState(false); update()" ng-show="editId">Lưu</button>
+                <button class="btn btn-danger" ng-click="addState(false); editId=null; NewsCategory.Name=null" ng-show="state|| editId">Hủy</button>
+            </p>
+
+            <table class="table table-hover table-bordered" ng-show="!state && !editId">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên tài liệu</th>
+                        <th>Ghi chú</th>
+                        <th>File</th>
+                        <th>Ngày đăng</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in documentList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.Note}}</td>
+                        <td>{{item.LinkDownload}}</td>
+                        <td>{{item.CreatedDate | date: "dd/MM/yyyy"}}</td>
+                        <td>
+                            <i class="fa fa-pencil fa-2x" title="Edit" ng-click="edit($index)" style="margin-right:10px"></i>
+                            <i class="fa fa-trash-o fa-2x" title="Xóa" ng-click="delete($index)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div ng-show="state || editId" class="col-md-6">
+                <div class="form-group">
+                    <label>Tên tài liệu</label>
+                    <input class="form-control" placeholder="Tên tài liệu" ng-model="document.Name" />
+                </div>
+
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <textarea class="form-control" ng-model="document.Note" placeholder="Ghi chú"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>File</label>
+                    <button class="btn btn-primary" id="linkDownload" onclick="BrowseServer()" ng-model="document.LinkDownload">Choose file</button>
+                    <label>{{document.LinkDownload}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-success" ng-show="saved">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Đã lưu</strong>
+</div>
+
+
+<style>
+    #banner-list .fa {
+        cursor: pointer;
+        align-items: center;
+    }
+</style>
+
+<script>
+    function SetFileField(fileUrl, data) {
+        angular.element('#linkDownload').scope().setLinkDownload(fileUrl);
+        angular.element('#linkDownload').scope().$apply();
+        $('#linkDownload').val(fileUrl);
+    }
+</script>

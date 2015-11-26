@@ -1,0 +1,106 @@
+﻿
+a img {
+	border:0px;
+	padding:0;
+	margin:0;
+}
+
+p.albumtitle {
+    background-color: #336699;
+    border-bottom: 1px solid #444444;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+}
+div.thmb {
+    border-color: #AAAAAA #444444 #444444 #AAAAAA;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    font-size: 0.9em;
+    height: 190px;
+    margin: 8px 22px 2px 2px;
+    padding: 0;
+    text-align: center;
+    width: 155px;
+}
+
+div.thmb .sb img, div.thmb2 .sb img {
+    border: 5px solid #FFFFFF;
+    vertical-align: bottom;
+}
+div.thmb .op0, div.thmb2 .op0 div.thmb1 {
+    display: block;
+    margin: 0 auto;
+    padding:15px 0px 0px 10px;
+}
+
+.op1 {
+    background: url("../Images/WebImage/shadow_tr_8x8.png") no-repeat scroll right top transparent;
+    display: inline;
+    float: left;
+}
+
+.sb {
+    background: url("../Images/WebImage/shadow_800x800.png") repeat scroll right bottom transparent;
+}
+
+.ib {
+    border: 1px solid #A9A9A9;
+    left: -8px;
+    position: relative;
+    top: -8px;
+}
+
+.col a {
+    color: #9B3535;
+    text-decoration: underline;
+}
+
+/*gallery ảnh*/
+
+.phocagallery-box-file {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #E8E8E8;
+    margin: 5px;
+    padding: 5px;
+}
+.phocagallery-box-file {
+    float: left;
+    height: 140px;
+    margin: 5px;
+    overflow: visible;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    width: 120px;
+}
+
+.phocagallery-box-file-first {
+    background: url("../Images/WebImage/shadow1.gif") no-repeat scroll 0 0 transparent;
+}
+.phocagallery-box-file-first {
+    display: table;
+    height: 100px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 100px;
+}
+.phocagallery-box-file-second {
+    display: table-cell;
+    vertical-align: middle;
+}
+.phocagallery-box-file-second {
+    display: table-cell;
+    vertical-align: middle;
+}
+.phocagallery-box-file a img {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.phocagallery-box-file:hover, .phocagallery-box-file.hover {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #B36B00;
+}

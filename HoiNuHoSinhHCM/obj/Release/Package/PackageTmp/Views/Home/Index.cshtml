@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.News>
+@using HoiNuHoSinhHCM.Models
+
+@{
+    int stt = 1;
+    string link = "";
+    ViewBag.Title = "Hội chu sinh và sơ sinh thành phố Hồ Chí Minh";
+}
+<div class="row">
+    <div class="col-sm-12 slide-home">
+        @foreach (var item in Model)
+        {
+            link = "/tin-tuc/" + Exts.ToAscii(item.NewsCategory.Name) + '/' + Exts.ToAscii(item.Name);
+            if (stt == 1)
+            {
+                <section class="featured col-xs-12">
+                    <div class="cover" style="width:100%">
+                        <a href="@link"><img src="@item.Image" alt="" class="img-responsive"></a>
+                    </div>
+                    <article>
+                        <h1><a href="@link">@item.Name</a></h1>
+                        <p class="summary">
+                            @Html.Raw(@item.Summary)
+                        </p>
+                    </article>
+                </section>
+            }
+            else
+            {
+                <section class="col-xs-6 col-sm-3">
+                    <div class="cover">
+                        <a href="@link"><img src="@item.Image" class="img-responsive" alt=""></a>
+                    </div>
+                    <article>
+                        <h1><a href="@link">@item.Name</a></h1>
+                    </article>
+                </section>
+            }
+            stt++;
+        }
+    </div>
+</div>
+
+@Html.Action("Categories", "Home")

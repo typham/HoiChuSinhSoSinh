@@ -1,0 +1,19 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.NewsCategory>
+@using HoiNuHoSinhHCM.Models
+
+<div class="row" id="categories">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 category-box">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="/kien-thuc/@Exts.ToAscii(item.Name)">@item.Name</a></h3>
+            </div>
+            <div class="panel-body">
+                @Html.Action("GetNewsByCategory", "News", new { CategoryId = item.Id })
+            </div>
+        </div>
+    </div>
+    }
+    
+</div>

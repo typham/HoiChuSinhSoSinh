@@ -1,0 +1,11 @@
+﻿@model HoiNuHoSinhHCM.Models.Common
+@{
+    int stt = 1;
+}
+<div class="col-md-12 box-sidebar box-slide-image">
+    @foreach (var item in Model.Image.Split('|'))
+    {
+        <a href="#" style="@(stt>1?"display: none;":"")"><img src="@item" class="img-responsive"></a>    
+        stt++;
+    }
+</div>

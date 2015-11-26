@@ -1,0 +1,403 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="hcsss.Master.cs" Inherits="HCSSS.Framework.hcsss.hcsss" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Hội chu sinh và sơ sinh thành phố Hồ Chí Minh</title>
+  
+    <script src="/Scripts/jquery.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.corner.js" type="text/javascript"></script>
+    <script src="/Scripts/menu.js" type="text/javascript"></script>
+    <script src="/Scripts/Modal.js" type="text/javascript"></script>
+    <script src="/Scripts/jqNews.js" type="text/javascript"></script>
+ <script src="/Scripts/advertising.js" type="text/javascript"></script>
+    <script src="/Scripts/lightbox-slideshow.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#bottom").corner("8px");
+//            $('img').each(function () {
+//                if ($(this).attr('src').length == 0 || $(this).attr('src').indexOf('http://') == -1) $(this).hide();
+            //            });
+            $('img').each(function () {
+                if ($(this).attr('src').length == 0 ) $(this).hide();
+            });
+        });
+        $(document).ready(function () {
+            $("#featured > ul").tabs({
+                fx: {
+                    opacity: "toggle"
+                }
+            }).tabs("rotate", 10000, true);
+        });
+
+        var layoutName = '<%=Request["layoutName"] %>';
+        var CategoryID = '<%=Request["CategoryID"] %>';
+    </script>
+    <script language="JavaScript" type="text/JavaScript">
+<!--
+        menu_status = new Array();
+
+        function showHide(theid) {
+            if (document.getElementById) {
+                var switch_id = document.getElementById(theid);
+
+                if (menu_status[theid] != 'show') {
+                    switch_id.className = 'show';
+                    menu_status[theid] = 'show';
+                } else {
+                    switch_id.className = 'hide';
+                    menu_status[theid] = 'hide';
+                }
+            }
+        }
+
+//-->
+    </script>
+    <style type="text/css">
+        .menu1
+        {
+            width: 180px;
+            background-image: url(../Images/WebImage/sanpham.jpg);
+            background-repeat: no-repeat;
+            height: 24px;
+            text-align: left;
+            font-weight: bold;
+            color: #FFF;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #000;
+            padding-top: 7px;
+            padding-left: 25px;
+        }
+        
+        .submenu
+        {
+            background-color: #CCCCCC;
+            display: block;
+            height: 19px;
+            padding-top: 2px;
+            padding-left: 37px;
+            color: #333333;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            border-top: solid 1px #000000;
+        }
+        
+        .hide
+        {
+            display: none;
+        }
+        
+        .show
+        {
+            display: block;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="/Styles/main.css" rel="stylesheet" type="text/css" />
+    <link href="/Styles/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/Styles/photogallery.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="content">
+        <div id="header">
+            <object type="application/x-shockwave-flash" data="/flash/bannerhoichusinh.swf"
+                width="1000" height="145">
+                <param name="movie" value="/flash/bannerhoichusinh.swf" />
+            </object>
+        </div>
+        <div id="menu">
+            <ul>
+            <%  %>
+                <asp:Repeater ID="RepMenu" runat="server">
+                    <ItemTemplate>
+                        <li runat="server" visible='<%#(Eval("Url").ToString().IndexOf("http://")==-1?true:false) %>'><span><a href='/<%#Eval("Path") %>.html'><%# Eval("Name") %></a></span></li>
+                        <li runat="server" visible='<%#(Eval("Url").ToString().IndexOf("http://")==-1?false:true) %>'><span><a href='<%#Eval("Url") %>'><%= Eval("Name") %></a></span></li>
+                    </ItemTemplate>
+                    
+                </asp:Repeater>
+                <li style="border: 0px; margin: 0; padding: 8px 25px 0 0px; width: 200px; float: right;">
+                    <div id="search">
+                        <label for="search">
+                        </label>
+                        <input type="text" onfocus="this.value=''" onblur="if (this.value=='') this.value='Từ khóa'"
+                            name="txtsearch" id="txtsearch" value=" Từ khóa " />
+                        <input name="apple" id="apple" type="hidden" value="search" />
+                        <input type="image" name="timkiem" id="timkiem" src="/Images/WebImage/search.png" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="liveshow">
+            <div id="featured">
+                <%for (int i = 0; i < listnew.Count; i++)
+                  {%>
+                <div style="" id="fragment-<%=i+1 %>" class="ui-tabs-panel ui-tabs-hide">
+                    <a href="#">
+                        <%="<img src=\"" + listnew[i].NewImage.ToString() + "\" align=\"left\" border=\"0\" width=\"400\" height=\"254\" />"%></a>
+                    <span>
+                        <%="<a href=\"/" + listnew[i].CategoryPath + "/" + listnew[i].NewId + "-" + listnew[i] .AliasUrl+ ".html\">" + listnew[i].NewName + "</a>"
+                        %>
+                    </span>
+                </div>
+                <%} %>
+                <ul class="ui-tabs-nav">
+                    <%for (int i = 0; i < listnew.Count; i++)
+                      {%>
+                    <li class="ui-tabs-nav-item" id="nav-fragment-<%=i+1 %>"><a href="#fragment-<%=i+1 %>">
+                        <span>
+                            <% if (listnew[i].NewName.Length > 100)
+                               { %>
+                            <%=listnew[i].NewName.Substring(0, 100)%>...</span></a> </li>
+                    <%}
+                               else
+                               {%>
+                    <%=listnew[i].NewName%></span></a> </li>
+                    <%} %>
+                    <%} %>
+                </ul>
+            </div>
+            <div id="liveshow_right">
+                <a href="#">
+                    <img src="/Images/WebImage/tracuu.jpg" border="0" /></a> <a href="#">
+                    <img src="/Images/WebImage/dangki.gif" border="0" /></a>
+            </div>
+        </div>
+        <div id="body">
+            <div id="body_left">
+                <!------ Begin Menu ----------->
+                <div id="menu_doc">
+                    <ul class="menu">
+                        <%if (menuList.Count > 0)
+                          {%>
+                        <% for (int i = 0; i < menuList.Count; i++)
+                           { %>
+                        <% if (menuList[i].items != null)
+                           { %>
+                        <%="<li class='expand'><a href='#' onclick=\"showHide('submenu" + i + "')\">" + menuList[i].Name + "</a>" %>
+                        <%="<ul class='acitem'><div id='submenu" + i + "' class='hide'>"%>
+                        <%for (int j = 0; j < menuList[i].items.Count; j++)
+                          {%>
+                        <%="<li><a href='#'>" + menuList[i].items[j].Name + " </a></li>"%>
+                        <%  } %>
+                        <%="</div></ul>"%>
+                        <%="</li>" %>
+                        <% } %>
+                        <%else
+                           {%>
+                        <%="<li class=''><a href='"+menuList[i].Url+"'>" + menuList[i].Name + "</a></li>"%>
+                        <%  } %>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+                <!------ End Menu ----------->
+                <!------ begin quang cao ----------->
+				<!--
+                <div class="quangcao_left">
+                    <div>
+                        <div class="video_bgtop2">
+                            Thăm dò ý kiến</div>
+                        <div class="video_clip2">
+                            <p class="tinvan">
+                                Bạn nghĩ gì về quyết định cấm trông giữ xe ở Hà Nội?</p>
+                            <p class="tinvan">
+                                <input type="checkbox" />
+                                Trả lời 1</p>
+                            <p class="tinvan">
+                                <input type="checkbox" />
+                                Trả lời 2</p>
+                            <p class="tinvan">
+                                <input type="checkbox" />
+                                Trả lời 3</p>
+                            <p class="tinvan">
+                                <input type="checkbox" />
+                                Trả lời 4</p>
+                            <p class="tinvan" style="width: 167px; background: #fff; font-size: 11px;">
+                                <input type="button" value="Biểu quyết" /><a href="#"> Xem kết quả </a>
+                            </p>
+                        </div>
+                    </div>
+					-->
+                    <!----------------Begin online -------------------->
+                    <div class="online">
+                        <p class="songuoi">
+                            SỐ NGƯỜI TRUY CẬP</p>
+                        <p class="truycap">
+                            Số lượng truy cập :<b>125,879</b></p>
+                    </div>
+                    <!----------------End Online--------------------->
+                    <!----------------Begin Quảng cáo--------------------->
+
+                    <div class="adv-box">
+        <div id="ADV_LEFT">
+        </div>
+        </div>
+                    <!----------------End Quảng cáo--------------------->
+                </div>
+                </div>
+                <div id="body_middle">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div id="body_right">
+                    <!------ begin email_dientu ----------->
+                    <div class="email_dientu">
+                        <div class="email_noidung">
+                            <p>
+                                <span>Tên truy cập:</span><input type="text" id="user" class="frm" /></p>
+                            <p>
+                                <span>Mật khẩu:</span><input type="password" id="pw" class="frm" /></p>
+                            <p class="btp">
+                                <input type="button" value="Đăng Nhập" class="bt" /></p>
+                        </div>
+                    </div>
+                    <!------ End email_dientu ----------->
+                    <!------ begin video ----------->
+                    <div class="video">
+                        <div class="video_bgtop">
+                            Video</div>
+                        <div class="video_clip">
+                            <%--<img src="../Images/WebImage/video.jpg" />--%>
+                            <div id="container">
+                                <a href="http://www.macromedia.com/go/getflashplayer"></a>
+                            </div>
+                            <script type="text/javascript" src="/Scripts/swfobject.js"></script>
+                            <script type="text/javascript">
+                                var s1 = new SWFObject("/Lib/player.swf", "mpl", "214", "180", "7", "#8a8a8a");
+
+                                s1.addParam('allowscriptaccess', 'always');
+                                s1.addParam('allowfullscreen', 'true');
+                                s1.addVariable('width', '214');
+                                s1.addVariable('height', '180');
+                                s1.addVariable('file', '/PublicImages/Video/diemdenHCSSS.flv');
+                                s1.addVariable('recommendations', '');
+                                s1.addVariable('repeat', 'list');
+                                s1.addVariable('shuffle', 'false');
+                                s1.addVariable('linkfromdisplay', 'true');
+                                s1.addVariable('linktarget', '_self');
+                                s1.addVariable('javascriptid', 'delfivideo');
+                                s1.addVariable('enablejs', 'true');
+                                s1.addVariable('shownavigation', 'true');
+                                s1.addParam('allownetworking', 'all');
+                                s1.addVariable("autostart", "false");
+                                s1.addVariable("stretching", "uniform");
+                                s1.write("container");
+                                function showVideo(v_this) {
+                                    var video = v_this.title;
+
+                                    s1.addParam('allowscriptaccess', 'always');
+                                    s1.addParam('allowfullscreen', 'true');
+                                    s1.addVariable('width', '214');
+                                    s1.addVariable('height', '180');
+                                    s1.addVariable('file', video);
+                                    s1.addVariable('recommendations', '');
+                                    s1.addVariable('repeat', 'list');
+                                    s1.addVariable('shuffle', 'false');
+                                    s1.addVariable('linkfromdisplay', 'true');
+                                    s1.addVariable('linktarget', '_self');
+                                    s1.addVariable('javascriptid', 'delfivideo');
+                                    s1.addVariable('enablejs', 'true');
+                                    s1.addVariable('shownavigation', 'true');
+                                    s1.addParam('allownetworking', 'all');
+                                    s1.addVariable("autostart", "true");
+                                    s1.addVariable("stretching", "uniform");
+                                    s1.write("container");
+
+                                }
+                            </script>
+                            <asp:Panel ID="Panel1" ScrollBars="Auto" runat="server" Height="70">
+                                <asp:Repeater ID="repVideo" runat="server">
+                                    <ItemTemplate>
+                                        <p style="text-align: left; padding-left: 5px;">
+                                            <img alt="video" src="/Images/WebImage/icon_camera.gif" />
+                                            <a runat="server" id="linkvideo" title='<%#Bind("gitempath") %>' href='#' rel=''
+                                                onclick="showVideo(this); return false;" target="_self">
+                                                <asp:Label runat="server" ID="lblname" Text='<%#Bind("gitemname") %>'></asp:Label>
+                                            </a>
+                                        </p>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </asp:Panel>
+                            <%-- <p>
+                            <img src="../Images/WebImage/icon_camera.gif" />
+                            <a href="#"></a>
+                        </p>--%>
+                        </div>
+                    </div>
+                    <!------ End video ----------->
+                    <!------ begin video ----------->
+                    <div class="video">
+                        <div class="video_bgtop">
+                            Tin Vắn</div>
+                        <div class="video_clip">
+                            <div id="jqnews">
+                                <asp:Repeater ID="reptinvan" runat="server">
+                                    <ItemTemplate>
+                                        <p style="text-align: left; padding: 3px;">
+                                            <img alt="tin van" src="/Images/WebImage/icon_tinvan.png" />
+                                            <a id="linkTinvan" href="/<%# Eval("Path") %>/<%# Eval("ID") %>-<%# Eval("AliasUrl") %>.html">
+                                                <asp:Label runat="server" ID="lbltinvan" Text='<%#Bind("Name") %>'></asp:Label>
+                                            </a>
+                                        </p>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>
+                    </div>
+                    <!------ End video ----------->
+                    <!------ begin Doanh Nghiep ----------->
+                    <!------ End Hình ảnh ----------->
+                    <!------ begin Hinh ảnh ----------->
+                    <div class="video">
+                        <div class="video_bgtop">
+                            Hình ảnh</div>
+                        <div class="video_clip">
+                            <a href='ImageLibrary.aspx'>
+                                <img src="../Images/WebImage/hinhanh.jpg" border="0" style=" width:220px; height:220px"/></a>
+                        </div>
+                    </div>
+                    <!------ End Hình ảnh ----------->
+                    <!------ begin Liên kết Website ----------->
+                    <div class="lienketweb">
+                        <p>
+                            Liên kết website</p>
+                        <asp:DropDownList ID="cboLienket" runat="server" DataSourceID="XmlDataSource1" DataTextField="text"
+                            DataValueField="url" onchange="f_getNewlinks(this);" Style="width: 185px;">
+                        </asp:DropDownList>
+                        <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/App_Data/xml/weblink.xml">
+                        </asp:XmlDataSource>
+                    </div>
+                    <!------ End Liên kết website ----------->
+                </div>
+            </div>
+            <div class="quangcao_bottom" style="text-align: center;">
+                
+                &nbsp;
+            </div>
+            <div id="bottom">
+                <ul>
+                    <li><a href="<% = ResolveUrl("~/123/234/") %>"">TRANG CHỦ </a>| </li>
+                    <li><a href="#">GIỚI THIỆU </a>| </li>
+                    <li><a href="#">HỎI VÀ ĐÁP </a>| </li>
+                    <li><a href="#">BẢNG ĐỒ WEBSITE </a>| </li>
+                    <li><a href="#">LIÊN HỆ </a>| </li>
+                    <li><a href="#">DIỄN ĐÀN </a></li>
+                </ul>
+                <p>
+                    Bản quyền @ 2011. HỘI CHU SINH SƠ SINH TP. HỒ CHÍ MINH
+                    <br />
+                    Ghi rõ nguồn "Hội Chu Sinh Sơ Sinh Thành phồ Hồ Chí Minh" khi phát hành lại thông
+                    tin từ website này.
+                </p>
+            </div>
+        </div>
+        <div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model HoiNuHoSinhHCM.Models.Common
+@using HoiNuHoSinhHCM.Models
+@{
+    int stt = 1;
+}
+<header id="header">
+    <div id="banner" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model.Image.Split('|'))
+            {
+                <div class="item @(stt==1?"active":"")">
+                    <img alt="@Exts.GetCompanyName()" src="@item">
+                </div> 
+                stt++;
+            }
+            
+        </div>
+        <a class="left carousel-control" href="#banner" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#banner" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+</header>

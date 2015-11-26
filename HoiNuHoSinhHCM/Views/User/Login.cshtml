@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Trang đăng nhập - Thành viên hội chu sinh và sơ sinh TP Hồ Chí Minh";
+}
+
+<div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    <p class="message">Vui lòng đăng nhập để xem nội dung</p>
+</div>
+
+<form class="form-signin col-md-5 col-md-offset-4">
+    <input type="text" id="username" class="form-control" placeholder="Tên đăng nhập" required="" autofocus="" ng-model="UserInfo.Username">
+    <input type="password" id="password" class="form-control" placeholder="Mật khẩu" required="" ng-model="UserInfo.Password" style="margin:5px 0;">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
+</form>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('.form-signin').submit(function () {
+                $.ajax({
+                    url: '/User/Login',
+                    data: { Username: $('#username').val(), Password: $('#password').val() },
+                    type: 'post',
+                    success: function (res) {
+                        if (res==true) {
+                            window.location.href = '@Request.QueryString["ReturnUrl"]';
+                        } else {
+                            $('.message').text(res);
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>    
+}

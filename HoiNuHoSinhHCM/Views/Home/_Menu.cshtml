@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.NewsCategory>
+@using HoiNuHoSinhHCM.Models
+
+<nav>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <!-- Left nav -->
+            <ul class="nav navbar-nav">
+                <li><a href="/">Trang chủ</a></li>
+                @foreach (var item in Model)
+                {
+                     <li><a href="/@(Exts.ToAscii(item.Name)).html">@item.Name</a></li>
+                }
+                @*<li>
+                    <a href="#">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li>
+                            <a href="#">One more separated link <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li>
+                                    <a href="#">A long sub menu <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="disabled"><a class="disabled" href="#">Disabled item</a></li>
+                                        <li><a href="#">One more link</a></li>
+                                        <li><a href="#">Menu item 1</a></li>
+                                        <li><a href="#">Menu item 2</a></li>
+                                        <li><a href="#">Menu item 3</a></li>
+                                        <li><a href="#">Menu item 4</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Another link</a></li>
+                                <li><a href="#">One more link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>*@
+            </ul>
+
+            <!-- Right nav -->
+            <ul class="nav navbar-nav navbar-right">
+                @*<li class="active"><a href="bootstrap-navbar.html">Đăng nhập</a></li>*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="active"><a href="/User/Logout">Thoát</a></li>    
+                }
+            </ul>
+
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

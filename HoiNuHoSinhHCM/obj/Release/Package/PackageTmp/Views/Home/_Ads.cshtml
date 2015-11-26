@@ -1,0 +1,16 @@
+﻿@model HoiNuHoSinhHCM.Models.Common
+
+@try
+{
+    foreach (var item in Model.Image.Split('|'))
+    {
+        <div class="col-md-12 col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-0 box-sidebar box-ad">
+            <a href="@item.Split(';')[1]" target="_blank"><img src="@item.Split(';')[0]" class="img-responsive"></a>
+        </div>
+    }
+}
+catch
+{
+
+}
+

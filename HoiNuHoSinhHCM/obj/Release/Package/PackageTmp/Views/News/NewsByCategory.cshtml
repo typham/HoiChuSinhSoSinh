@@ -1,0 +1,26 @@
+﻿@model IEnumerable<HoiNuHoSinhHCM.Models.News>
+@using HoiNuHoSinhHCM.Models
+@{
+    ViewBag.Title = "NewsByCategory";
+    string link = "";
+}
+
+<h2>@ViewBag.categoryName</h2>
+
+<div class="row">
+@foreach (var item in Model)
+{
+    link = "/tin-tuc/" + Exts.ToAscii(item.NewsCategory.Name) + '/' + Exts.ToAscii(item.Name);
+    <article class="col-xs-12 news-by-category">
+        <div class="cover col-xs-3">
+            <a href="@link"><img src="http://img.v3.news.zdn.vn/w210/Uploaded/wyhktpu/2015_06_26/fewdwed.jpg" class="img-responsive"></a>
+        </div>
+        <header class="col-xs-9">
+            <h1><a href="@link">@item.Name</a></h1>
+            <p class="summary">@item.Summary</p>
+        </header>
+    </article>
+}
+</div>
+
+
